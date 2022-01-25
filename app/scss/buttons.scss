@@ -1,0 +1,454 @@
+@import 'config';
+
+//styling for disabled buttons
+a[aria-disabled="true"],
+button[disabled] {
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+/* buttonsblock */
+.buttonsblock {
+	text-align: center;
+	padding: 20px 0;
+
+	@media(min-width: $md) {
+		padding: 30px 0;
+	}
+
+	.row {
+		align-items: center;
+	}
+	&-wrap{
+		padding: 20px 0;
+	}
+	&-items {
+		padding: 25px 0;
+	}
+}
+
+.button {
+	background: transparent;
+	color: $color-black;
+	text-align: center;
+	text-decoration: none !important;
+	font-size: rem(16);
+	font-weight: $font-bold;
+	text-transform: uppercase;
+	border: none;
+	border-radius: 0;
+	border: solid 3px $color-2;
+	margin: 15px 0;
+	padding: 15px 30px;
+	display: inline-block;
+	position: relative;
+	transition: all 0.3s;
+	cursor: pointer;
+
+	&:hover,
+	&:focus {
+		background: $color-2;
+		color: $color-white;
+	}
+
+	&.__slidein {
+		background: right top / 210% 100% linear-gradient(to right, $color-2, 50%, transparent 50%);
+		width: 100%;
+
+		@media (min-width: $sm) {
+			width: auto;
+		}
+
+		&:hover,
+		&:focus {
+			background: left top / 210% 100% linear-gradient(to right, $color-2, 50%, transparent 50%);
+		}
+	}
+
+	&.__slideinnoborder{
+		background: right top / 210% 100% linear-gradient(to right, $color-2, 50%, $color-white 50%);
+		border: none;
+		width: 100%;
+
+		@media (min-width: $sm) {
+			width: auto;
+		}
+
+		&:hover,
+		&:focus {
+			background: left top / 210% 100% linear-gradient(to right,$color-2, 50%, $color-white 50%);
+		}
+	}
+	&.__slideinborderbtm {
+		background: right top / 210% 100% linear-gradient(to right, $color-2, 50%, transparent 50%);
+		border-bottom: solid 4px $color-2;
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		padding: 10px 5px;
+	
+		@media (min-width: $sm) {
+			width: auto;
+		}
+
+		&:hover,
+		&:focus {
+			background: left top / 210% 100% linear-gradient(to right, $color-2, 50%, transparent 50%);
+		}
+	}
+	&.__slideindarken {
+		color: $color-white;
+		background: $color-2;
+		text-transform:none;
+		border: none;
+		width: 100%;
+		z-index: 1;
+		@media (min-width: 576px) {
+			width: auto;
+		}
+		
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background-color: darken($color-2, 10%);
+			transform-origin: center right;
+			transform: scaleX(0);
+			transition: transform 0.25s ease-in-out;
+			z-index: -1;
+		}
+		&:hover,
+		&:focus {
+			&::before{
+				transform-origin: center left;
+				transform: scaleX(1);
+			}
+		}
+	}
+	&.__slideinround {
+		background: $color-5;
+		color: $color-2;
+		text-transform:none;
+		border: none;
+		border-radius: 27.5px;
+		span {
+			position: relative;
+			z-index:1;
+		}
+		&::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			background: $color-2;
+			border-radius: 27.5px;
+			height: 100%;
+			width: 0;
+			transition: inherit;
+			transform-origin: right;
+			transition: all 0.8s;
+		}
+		&:hover,
+		&:focus {
+			color: $color-white;
+			&::before {
+				width: 100%;
+			}
+		}
+	}
+	&.__moveleft {
+		color: $color-2;
+		text-transform: none;
+		border: none;
+		.textwrap {
+			padding: 0;
+			position: relative;
+			overflow: hidden;
+			span {
+				display: inline-block;
+				transition: all 0.6s ease;
+			}
+			span:nth-of-type(1) {
+				padding-right: 8px;
+				transform: translate(0, 0);
+			}
+			span:nth-of-type(2) {
+				position: absolute;
+				right: 0;
+				top: 0;
+				transform: translate(100%);
+			}
+		}
+		&:hover,
+		&:focus {
+			background: transparent;
+			.textwrap{
+				span:nth-of-type(1) {
+						transform: translate(-100%, 0);
+				}
+				span:nth-of-type(2) {
+						transform: translate(0, 0);
+				}	
+			}
+		}
+	}
+	&.__underline {
+		color: $color-2;
+		padding: 10px 0;
+		border: none;
+		text-transform: none;
+		&::before {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			background: $color-2;
+			height: 1px;
+			width: 100%;
+		}
+		&::after {
+			content: "";
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			background: $color-2;
+			height: 1px;
+			width: 0;
+			transition: 0.5s ease all;
+		}
+		&:hover, 
+		&:focus {
+			background: transparent;
+			&::before{
+				width: 0%;
+			}
+			&::after{
+				width: 100%;
+			}
+		}
+	}
+	&.__moveup {
+		background:$color-2;
+		color: $color-white;
+		text-transform: none;
+		border: none;
+		border-radius: 20px;
+		padding: 20px 50px;
+		.textwrap{
+			padding: 0;
+			position: relative;
+			overflow: hidden;
+			span {
+				display: inline-block;
+				transition: all 0.3s ease;
+			}
+			span:nth-of-type(1) {
+				transform: translate(0, 0);
+			}
+			span:nth-of-type(2) {
+				position: absolute;
+				right: 0;
+				top: 0;
+				transform: translate(0, 100%);
+			}
+		}
+		&:hover,
+		&:focus {
+			background: darken($color-2, 10%);
+			span:nth-of-type(1) {
+				transform: translate(0, -100%);
+			}
+			span:nth-of-type(2) {
+				transform: translate(0, 0);
+			}
+		}
+	}
+	&.__moveleftwithicons {
+		background:$color-2;
+		color: $color-white;
+		font-weight: $font-medium;
+		text-transform: none;
+		border: none;
+		border-radius: 24px;
+		padding: 15px 30px 15px 50px;
+		overflow: hidden;
+		.icon {
+			color: $color-white;
+			font-size: 20px;
+			position: absolute;
+			top:50%;
+			transition: all 0.2s ease;
+			transform: translateY(-50%);
+			&::before {
+				content: ">";
+			}
+		}
+		.icon:first-of-type {
+			left: 10%;
+		}
+		.icon:nth-of-type(2) {
+			right: -20px;
+		}
+	
+		&:hover,
+		&:focus {
+			background: darken($color-2, 20%);
+			color: $color-white;
+			padding: 15px 50px 15px 30px;
+			.icon:first-of-type {
+				left: -10%;
+			}
+			.icon:nth-of-type(2) {
+				right: 20px;
+			}
+		}
+	}
+	&.__moveiconleft {
+		color: $color-2;
+		text-transform: uppercase;
+		border: none;
+		padding: 10px 0;
+		width: 150px;
+		overflow: hidden;
+		z-index: 1;
+		.line {
+			&::before {
+				content: "__";
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				font-size: 20px;
+				transition: all 0.3s ease;
+				transform: translateX(0);
+			}
+		}
+		&:hover, 
+		&:focus {
+			background: transparent;
+			.line {
+				&::before{
+					transform: translateX(-50%);
+				}
+			}
+		}
+	}
+	&.__withmouseover {
+		background: $color-5;
+		color: $color-2;
+		border: none;
+		border-radius: 27.5px;
+		overflow: hidden;
+		&:hover, 
+		&:focus {
+			background: $color-2;
+			color: $color-white;
+		}
+		@keyframes ripple {
+			100% {
+				opacity:0;
+				transform: scale(2.5);
+			}
+		}
+		.buttonhover {
+			background: rgba(255,255,255,0.3);
+			border-radius: 27.5px;
+			display: block;
+			position: absolute;
+			transform: scale(0);
+			z-index: 1;
+		}
+		.buttonhover.drop {
+			animation: ripple 0.65s linear;
+		}
+	}
+	&.__animatetext {
+		color: $color-2;
+		border-radius: 50%;
+		padding: 25px;
+		display: inline-flex;
+		justify-content: center;
+		align-items: center;
+		width: 65%;
+		.falling-animation{
+			position: absolute;
+		}
+		.letter {
+			position: relative;
+			display: inline-block;
+			transform: translateZ(10px);
+			transform-origin: 50% 50% 10px;
+		}	
+		.letter.out {
+			transform: rotateX(90deg);
+			transition: transform 0.32s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+		}
+		.letter.behind {
+			transform: rotateX(-90deg);
+		}
+		.letter.in {
+			transform: rotateX(0deg);
+			transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		}
+		&:hover,
+		&:focus {
+			background: transparent;
+			div {
+				&:first-child {
+					transform: translate(0, -100%);
+				}
+				&:last-child {
+					transform: translate(0, 0);
+				}
+				span{
+					transform: translateY(-3px);
+				}
+			}
+		}
+	}
+	&.__scrollto {
+		color: $color-white;
+		text-decoration: none;
+		border: none;
+		border-radius: 26px;
+		padding: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: all 0.3s ease-in-out;
+		&::before {
+			content: "";
+			background: $color-2;
+			border-radius: 50%;
+			width: 140px;
+			height: 140px;
+			transition: all 0.3s ease;
+			z-index: 0;
+		}
+		span {
+			margin: 2px 15px 10px 15px;
+			position: absolute;
+			z-index: 1;
+		}
+		I {
+			position: absolute;
+			left: 50%;
+			bottom: 20%;
+			font-size: 15px;
+			transform: translate(-50%, -50%);
+		}
+		&:hover,
+		&:focus {
+			background: transparent;
+			&::before {
+				transform: scale(1.1);
+				background:darken($color-2, 20%);
+			}
+		}
+	}
+}
+
+
